@@ -3,6 +3,7 @@ package com.qk.mscliente.controller;
 import com.qk.mscliente.dto.ClienteDto;
 import com.qk.mscliente.service.ClienteService;
 import com.qk.mscliente.dto.SuccessResponse;
+import com.qk.mscliente.util.GeneralMehods;
 import org.jspecify.annotations.NonNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -26,7 +27,7 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<@NonNull SuccessResponse> guardarCliente(@Validated @RequestBody ClienteDto clienteDto) {
-        return ResponseEntity.created(null).body(clienteService.guardarCliente(clienteDto));
+        return GeneralMehods.createdWithLocation("", clienteService.guardarCliente(clienteDto));
     }
 
     @GetMapping

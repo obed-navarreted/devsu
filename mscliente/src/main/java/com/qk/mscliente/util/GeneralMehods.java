@@ -1,8 +1,14 @@
 package com.qk.mscliente.util;
 
 import com.qk.mscliente.dto.ClienteDto;
+import com.qk.mscliente.dto.SuccessResponse;
 import com.qk.mscliente.entity.Cliente;
+import org.jspecify.annotations.NonNull;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tools.jackson.databind.ObjectMapper;
+
+import java.net.URI;
 
 public class GeneralMehods {
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -49,5 +55,14 @@ public class GeneralMehods {
                 clienteDto.contrasena(),
                 clienteDto.estado()
         );
+    }
+
+    public static ResponseEntity<@NonNull SuccessResponse> createdWithLocation(Object resourceId, SuccessResponse successResponse) {
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(resourceId)
+                .toUri();
+        return ResponseEntity.created(location).body(successResponse);
     }
 }

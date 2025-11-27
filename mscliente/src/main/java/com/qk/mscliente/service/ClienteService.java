@@ -21,6 +21,7 @@ import static com.qk.mscliente.util.GeneralMehods.dtoToCliente;
 @Component
 @Transactional(readOnly = true)
 public class ClienteService {
+    private static final String REDIS_CLIENTE_HASH = "clientes";
     private final Logger log = LoggerFactory.getLogger(ClienteService.class);
     private final ClienteRepository clienteRepository;
     private final RedisTemplate<String, Object> redisTemplate;
@@ -35,7 +36,7 @@ public class ClienteService {
         List<Cliente> clientes = clienteRepository.findAllClientes();
         for (Cliente cliente : clientes) {
             ClienteDto clienteDto = clienteToDto(cliente);
-            redisTemplate.opsForHash().put("clientes", String.valueOf(cliente.getId()),
+            redisTemplate.opsForHash().put(REDIS_CLIENTE_HASH, String.valueOf(cliente.getId()),
                     GeneralMehods.toJsonString(clienteDto));
         }
     }
@@ -46,7 +47,7 @@ public class ClienteService {
         Cliente newCliente = clienteRepository.save(cliente);
         log.info("Cliente guardado exitosamente");
         ClienteDto event = clienteToDto(cliente);
-        redisTemplate.opsForHash().put("clientes", String.valueOf(newCliente.getId()),
+        redisTemplate.opsForHash().put(REDIS_CLIENTE_HASH, String.valueOf(newCliente.getId()),
                         GeneralMehods.toJsonString(event));
         return new SuccessResponse(event);
     }
@@ -85,7 +86,7 @@ public class ClienteService {
 
         clienteRepository.save(clienteExistente);
 
-        redisTemplate.opsForHash().put("clientes", String.valueOf(id),
+        redisTemplate.opsForHash().put(REDIS_CLIENTE_HASH, String.valueOf(id),
                 GeneralMehods.toJsonString(clienteDto));
         log.info("Cliente actualizado exitosamente");
         return new SuccessResponse("Cliente actualizado exitosamente");
@@ -98,7 +99,7 @@ public class ClienteService {
                 () -> new ResourceNotFoundException("(eliminarCliente) Cliente no encontrado con id: " + id));
 
         clienteRepository.delete(clienteExistente);
-        redisTemplate.opsForHash().delete("clientes", String.valueOf(id));
+        redisTemplate.opsForHash().delete(REDIS_CLIENTE_HASH, String.valueOf(id));
         log.info("Cliente eliminado exitosamente");
         return new SuccessResponse("Cliente eliminado exitosamente");
     }
