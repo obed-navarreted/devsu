@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "dc2e812e-7c3b-4de4-958c-011651f2398d",
+		"name": "ms-cuenta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17975137",
+		"_collection_link": "https://onavarrete.postman.co/workspace/Team-Workspace~9b660770-128a-429e-8f0b-e5d245501c85/collection/17975137-dc2e812e-7c3b-4de4-958c-011651f2398d?action=share&source=collection_link&creator=17975137"
+	},
+	"item": [
+		{
+			"name": "Crear Cuenta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tipoCuenta\": \"AHORRO\",\n  \"clienteId\": 25\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v2/cuentas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v2",
+						"cuentas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

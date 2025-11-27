@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "a2c93d8a-ada5-4750-aff5-9451b9cb784f",
+		"name": "ms-cliente",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17975137",
+		"_collection_link": "https://onavarrete.postman.co/workspace/Team-Workspace~9b660770-128a-429e-8f0b-e5d245501c85/collection/17975137-a2c93d8a-ada5-4750-aff5-9451b9cb784f?action=share&source=collection_link&creator=17975137"
+	},
+	"item": [
+		{
+			"name": "Agregar Cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Edgard Navarrete\",\n    \"genero\": \"M\",\n    \"edad\": 99,\n    \"identificacion\": \"0010000001111Y\",\n    \"direccion\": \"DIR1\",\n    \"telefono\": \"77665544\",\n    \"contrasena\": \"1234\",\n    \"estado\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
